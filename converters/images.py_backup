@@ -1,0 +1,87 @@
+import os, subprocess, uuid
+from flask import Flask, render_template, request, send_file, jsonify, url_for
+from rembg import remove
+from PIL import Image
+from io import BytesIO
+
+def convert_image(request, base):
+    f = request.files["file"]
+    fmt = request.form["format"]
+
+    uid = str(uuid.uuid4())
+    in_f = f"{base}/{uid}_{f.filename}"
+    out_f = in_f.rsplit(".",1)[0] + "." + fmt
+
+    f.save(in_f)
+
+    # Se il formato di output è .ico, ridimensioniamo per sicurezza
+    if fmt == "ico":
+        with Image.open(in_f) as img:
+            img.thumbnail((64, 64))  # mantiene proporzioni
+            # salva temporaneamente prima di passare a magick
+            temp_path = in_f.rsplit(".",1)[0] + "_resized.png"
+            img.save(temp_path)
+            in_f_for_magick = temp_path
+    else:
+        in_f_for_magick = in_f
+
+    subprocess.run(["magick", in_f_for_magick, out_f], check=True)
+
+    # rimuovi eventuale file temporaneo
+    if fmt == "ico" and os.path.exists(temp_path):
+        os.remove(temp_path)
+
+    return send_file(out_f, as_attachment=True)
+
+def remove_image_background(request, base_dir):
+    f = request.files['file']
+    filename = f.filename
+    input_path = os.path.join(base_dir, f"{uuid.uuid4()}_{filename}")
+    temp_png_path = os.path.join(base_dir, f"{uuid.uuid4()}_temp.png")
+
+    # Salvo file originale
+    f.save(input_path)
+
+    # Rimuovo sfondo (output sempre PNG)
+    with open(input_path, "rb") as i:
+        input_bytes = i.read()
+        output_bytes = remove(input_bytes)
+    with open(temp_png_path, "wb") as o:
+        o.write(output_bytes)
+
+    # Leggo il formato desiderato dal form (default PNG)
+    output_format = request.form.get("format", "png").lower()
+    if output_format not in ["png", "webp", "gif", "ico"]:
+        output_format = "png"
+
+    if output_format != "png":
+        # converto il PNG temporaneo nel formato desiderato
+        output_path = os.path.join(base_dir, f"{uuid.uuid4()}.{output_format}")
+
+
+        # Se l'output è ico, ridimensioniamo
+        if output_format == "ico":
+            with Image.open(temp_png_path) as img:
+                img.thumbnail((64,64))
+                temp_resized_path = temp_png_path.rsplit(".",1)[0] + "_resized.png"
+                img.save(temp_resized_path)
+                in_f_for_magick = temp_resized_path
+        else:
+            in_f_for_magick = temp_png_path
+
+        subprocess.run([
+            "magick", in_f_for_magick,
+            "-background", "none",
+            output_path
+        ], check=True)
+
+
+        # rimuovi eventuale file temporaneo
+        if output_format == "ico" and os.path.exists(temp_resized_path):
+            os.remove(temp_resized_path)
+
+        os.remove(temp_png_path)  # rimuovo il PNG temporaneo
+    else:
+        output_path = temp_png_path
+
+    return send_file(output_path, as_attachment=True)
