@@ -1,4 +1,4 @@
-🇬🇧 [English](README.MD) | 🇮🇹 Italiano
+🇬🇧 [English](README.md) | 🇮🇹 Italiano
 # Web Media Converter
 
 Web Media Converter è un’applicazione web per **convertire file multimediali** (immagini, video e PDF) direttamente dal browser, tramite una semplice interfaccia web basata su Python e Flask.
