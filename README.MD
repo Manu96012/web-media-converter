@@ -1,110 +1,111 @@
 # Web Media Converter
 
-Web Media Converter è un’applicazione web per **convertire file multimediali** (immagini, video e PDF) direttamente dal browser, tramite una semplice interfaccia web basata su Python e Flask.
+Web Media Converter is a web application designed to **convert media files** (images, videos, and PDFs) directly from the browser, through a simple web interface built with Python and Flask.
 
-Il progetto nasce con l’obiettivo di offrire uno strumento leggero, auto‑hostabile e facile da estendere.
-
----
-
-## 🚀 Funzionalità
-
-- 🖼️ Conversione di immagini tra formati comuni
-- 🎥 Conversione video
-- 📄 Conversione PDF
-- Interfaccia web semplice e intuitiva
-- Backend Python / Flask
-- Utilizzabile interamente in locale
+The project aims to provide a lightweight, self-hostable, and easily extensible tool.
 
 ---
 
-## 📦 Installazione
+## 🚀 Features
 
-### Requisiti
+- 🖼️ Image conversion between common formats  
+- 🎥 Video conversion  
+- 📄 PDF conversion  
+- Simple and intuitive web interface  
+- Python / Flask backend  
+- Fully usable locally  
+
+---
+
+## 📦 Installation
+
+### Requirements
 - Python 3.9+
 - pip
 - ImageMagick
 - ffmpeg
 - Poppler
 
-### Clonare il repository
+### Clone the repository
 ```bash
 git clone https://github.com/Manu96012/web-media-converter.git
 cd web-media-converter
 ```
 
-### Creare un virtual environment
+### Create a virtual environment
 ```bash
 python3 -m venv .venv
-sudo chmod u+x .venv/bin/activate && source .venv/bin/activate   # Aggiunta dei permessi di esecuzione + activate del venv su Linux / macOS
+sudo chmod u+x .venv/bin/activate && source .venv/bin/activate   # Linux / macOS
 .venv\Scripts\activate    # Windows
 ```
 
-### Installare le dipendenze
+### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## ▶️ Avvio dell’applicazione
+## ▶️ Run the application
 
 ```bash
 python app.py
 ```
 
-Apri il browser su:
+Open your browser at:
 ```
 http://localhost:9899
 ```
-L'applicazione è raggiungibile anche in LAN:
+The application is also accessible over the local network (LAN):
 ```
 http://0.0.0.0:9899
 ```
 
 ---
 
-## 🧠 Struttura del progetto
+## 🧠 Project structure
 
 ```
 web-media-converter/
-├── app.py              # Entry point Flask
-├── converters/         # Logica di conversione
-├── static/             # File statici (CSS, JS)
-├── templates/          # Template HTML
-├── requirements.txt    # Dipendenze Python
-└── README.md
+├── app.py              # Flask entry point
+├── converters/         # Conversion logic
+├── static/             # Static files (CSS, JS)
+├── templates/          # HTML templates
+├── requirements.txt    # Python dependencies
+├── README.MD
+└── README.IT.MD
 ```
 
 ---
 
-## 🛠️ Utilizzo
+## 🛠️ Usage
 
-1. Apri l’interfaccia web
-2. Carica il file da convertire
-3. Seleziona il formato di output
-4. Avvia la conversione
-5. Scarica il file convertito
-
----
-
-## 🤝 Contribuire
-
-Contributi, suggerimenti e pull request sono benvenuti.
-
-1. Fai un fork del progetto
-2. Crea un branch per la tua feature
-3. Commit con messaggi chiari
-4. Apri una Pull Request
+1. Open the web interface
+2. Upload the file to convert
+3. Select the desired output format
+4. Start the conversion
+5. Download the converted file
 
 ---
 
-## 📜 Licenza
+## 🤝 Contributing
 
-Questo progetto è distribuito sotto licenza **MIT**.
+Contributions, suggestions, and pull requests are welcome.
+
+1. Fork the project
+2. Create a branch for your feature
+3. Commit with clear messages
+4. Open a Pull Request
 
 ---
 
-## ✉️ Autore
+## 📜 License
 
-Creato da **Manu96012**  
+This project is distributed under the **MIT** license.
+
+---
+
+## ✉️ Author
+
+Created by **Manu96012**  
 GitHub: https://github.com/Manu96012
