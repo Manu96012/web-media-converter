@@ -1,6 +1,4 @@
-```md
-🇬🇧 English | 🇮🇹 [Italiano](README.IT.MD)
-```
+🇬🇧 English | 🇮🇹 [Italiano](README-IT.md)
 
 # Web Media Converter
 
