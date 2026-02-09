@@ -74,8 +74,8 @@ web-media-converter/
 ├── static/             # Static files (CSS, JS)
 ├── templates/          # HTML templates
 ├── requirements.txt    # Python dependencies
-├── README.MD
-└── README.IT.MD
+├── README.md
+└── README-IT.md
 ```
 
 ---
